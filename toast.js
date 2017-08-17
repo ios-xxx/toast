@@ -23,10 +23,10 @@ function toast(msg,delay) {
         a+=0.05;
 
         //console.log(a);
-        document.getElementById('toast').style.background='rgba(0,0,0,'+a+')';
-        document.getElementById('toast').style.color='rgba(255,255,255,'+a+')';
+        getId('toast').style.background='rgba(0,0,0,'+a+')';
+        getId('toast').style.color='rgba(255,255,255,'+a+')';
+
         if(count >= 18){
-            //  延时3秒
 
             // 延时默认1秒
             if(delay < 10) delay = 1000;
@@ -43,21 +43,40 @@ function toast(msg,delay) {
                     count -=2;
                     a -=0.05;
                     //console.log(a);
-                    document.getElementById('toast').style.background='rgba(0,0,0,'+a+')';
-                    document.getElementById('toast').style.color='rgba(255,255,255,'+a+')';
+                    getId('toast').style.background='rgba(0,0,0,'+a+')';
+                    getId('toast').style.color='rgba(255,255,255,'+a+')';
                     if(count <= 1) {
                         clearInterval(reduceAnimation);
-                        document.getElementById('toast').style.display='none';
+                        getId('toast').style.display='none';
                     }
                 }
             },delay);
         }
     }
+}
+
+function trim(str)
+{
+    var result;
+    result = str.replace(/(^\s+)|(\s+$)/g,"");
+    // if(is_global.toLowerCase()=="g")
+    // {
+    //     result = result.replace(/\s/g,"");
+    // }
+    result = result.replace(/\s/g,"");
+    return result;
+}
 
 
+// 获取标识
+function getID(s) {
 
-
-
-
-
+    var rs = document.getElementsByClassName(s)[0];
+    if(rs != null) return rs;
+    rs = document.getElementById(s);
+    if(rs != null) return rs;
+    rs = document.getElementsByName(s)[0];
+    if(rs != null) return rs;
+    alert("没有获取到任何标识");
+    return;
 }
